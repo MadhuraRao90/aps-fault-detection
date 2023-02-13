@@ -33,7 +33,8 @@ class DataIngestion:
             # save the df as csv
             logging.info("save the dataframe as csv")
             df.to_csv(path_or_buf=self.data_ingestion_config.feature_store_file_path,index=False,header=True)
-            logging.info(f"checking for columns -data ingestion :{list(df.columns)}")
+            #logging.info(f"checking for columns -data ingestion :{list(df.columns)}")
+            
             #Splitting the data into train and test
             logging.info("splitting the data into train and test data ")
             train_df,test_df=train_test_split(df,test_size=self.data_ingestion_config.test_size,

@@ -103,7 +103,7 @@ class DataValidation:
             logging.info(f"======================Starting with data validation ==================")
             logging.info(f"Reading base dataframe")
             base_df=pd.read_csv(self.data_validation_config.base_file_path)
-            logging.info(f"checking for columns -data validation {list(base_df.columns)}")
+           # logging.info(f"checking for columns -data validation {list(base_df.columns)}")
             logging.info("replace missing values in base dataframe")
             base_df.replace({"na":np.NAN},inplace=True)
             
@@ -112,14 +112,14 @@ class DataValidation:
             logging.info(f"reading train dataframe")
             
             train_df=pd.read_csv(self.data_ingestion_artifact.train_file_path)
-            logging.info(f"checking for columns -data validation train df {list(train_df.columns)}")
+            #logging.info(f"checking for columns -data validation train df {list(train_df.columns)}")
            
             logging.info(f"train_file_path{self.data_ingestion_artifact.train_file_path}")
             logging.info(f"reading test dataframe")
             logging.info(f"test_file_path{self.data_ingestion_artifact.test_file_path}")
             
             test_df=pd.read_csv(self.data_ingestion_artifact.test_file_path)
-            logging.info(f"checking for columns -data validation test df {list(test_df.columns)}")
+            #logging.info(f"checking for columns -data validation test df {list(test_df.columns)}")
            
             logging.info(f"drop missing values column in test and train database")
             train_df=self.drop_missing_values_columns(df=train_df,report_key_name="missing_values_within_train_dataset")

@@ -45,12 +45,12 @@ class DataTransformation:
             logging.info(f"reading training and testing file")
             train_df=pd.read_csv(self.data_ingestion_artifact.train_file_path)
             test_df=pd.read_csv(self.data_ingestion_artifact.test_file_path)        
-            logging.info(f"checking for columns -data transformation- train and test {test_df.columns} {train_df.columns}")
+            #logging.info(f"checking for columns -data transformation- train and test {test_df.columns} {train_df.columns}")
     #selecting input feature for train and test dataframe 
             logging.info(f"selecting input feature for train and test dataframe")      
             input_feature_train=train_df.drop(config_entity.TARGET_COLUMN,axis=1)
             input_feature_test=test_df.drop(config_entity.TARGET_COLUMN,axis=1)
-            logging.info(f"checking columns input feature for train and test dataframe{list(input_feature_train.columns)}{list(input_feature_test)}")
+            #logging.info(f"checking columns input feature for train and test dataframe{list(input_feature_train.columns)}{list(input_feature_test)}")
     # selecting the target column
             logging.info(f"selecting the target column")   
             target_feature_train_df=train_df[config_entity.TARGET_COLUMN]
@@ -65,9 +65,8 @@ class DataTransformation:
             logging.info(f"transformtion on target column") 
             target_feature_train_arr=label_encoder.transform(target_feature_train_df)
             target_feature_test_arr=label_encoder.transform(target_feature_test_df)
-            logging.info(f"checking for columns input feature train {list(input_feature_train.columns)}")
-            for i in list(input_feature_train.columns):
-                logging.info(f" columns :{i}")
+            #logging.info(f"checking for columns input feature train {list(input_feature_train.columns)}")
+            
             transformation_pipeline=DataTransformation.get_data_transformer_object()
             transformation_pipeline.fit(input_feature_train)
             
@@ -91,8 +90,8 @@ class DataTransformation:
             #target encoder
             train_arr=np.c_[input_feature_train_arr,target_feature_train_arr]
             test_arr=np.c_[input_feature_test_arr,target_feature_test_arr]
-            logging.info(f"checking for columns {train_arr.shape}")
-            logging.info(f"checking for columns {test_arr.shape}")
+            #logging.info(f"checking for columns {train_arr.shape}")
+            #logging.info(f"checking for columns {test_arr.shape}")
 
             # save numpy array
             logging.info("saving the numpy arrays for transformed test and train data")
