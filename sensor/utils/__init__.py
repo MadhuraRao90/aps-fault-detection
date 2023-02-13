@@ -5,7 +5,7 @@ from sensor.logger import logging
 import sys,os
 import yaml
 import dill
-
+import numpy as np
 def get_collection_as_dataframe(database_name:str,collection_name:str)->pd.DataFrame:
     """This function returns collection as dataframe  
     ======================================
@@ -94,3 +94,6 @@ def load_numpy_array_data(file_path:str)->np.array:
             return np.load(file_obj)
     except Exception as e:
         raise SensorException(e, sys)
+
+
+    

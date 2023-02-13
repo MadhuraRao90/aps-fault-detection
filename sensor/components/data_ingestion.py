@@ -33,7 +33,7 @@ class DataIngestion:
             # save the df as csv
             logging.info("save the dataframe as csv")
             df.to_csv(path_or_buf=self.data_ingestion_config.feature_store_file_path,index=False,header=True)
-
+            logging.info(f"checking for columns -data ingestion :{list(df.columns)}")
             #Splitting the data into train and test
             logging.info("splitting the data into train and test data ")
             train_df,test_df=train_test_split(df,test_size=self.data_ingestion_config.test_size,
@@ -46,8 +46,8 @@ class DataIngestion:
             test_store_dir=os.path.dirname(self.data_ingestion_config.test_file_path)
             os.makedirs(train_store_dir,exist_ok=True)
             os.makedirs(test_store_dir,exist_ok=True)
-            train_df.to_csv(path_or_buf=self.data_ingestion_config.train_file_path)
-            test_df.to_csv(path_or_buf=self.data_ingestion_config.test_file_path)
+            train_df.to_csv(path_or_buf=self.data_ingestion_config.train_file_path,index=False,header=True)
+            test_df.to_csv(path_or_buf=self.data_ingestion_config.test_file_path,index=False,header=True)
 
             # Prepare artifact 
             logging.info(f"Preparing the artifact for data ingestion")

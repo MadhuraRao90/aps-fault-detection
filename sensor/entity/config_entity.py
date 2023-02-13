@@ -55,18 +55,44 @@ class DataValidationConfig:
         raise SensorException(e, sys) 
            
 class DataTransformationConfig:
+    try:
+        def __init__(self,training_pipeline_config:TrainingPipelineConfig):
+            self.data_transformation_dir=os.path.join(training_pipeline_config.artifact_dir,"data_transformation")
+            self.tranform_object_path=os.path.join(self.data_transformation_dir,"transformer",TRANSFORMER_OBJECT_FILE_NAME)
+            self.transformed_train_path=os.path.join(self.data_transformation_dir,"transformed",TRAIN_FILE_NAME.replace("csv", "npz"))
+            self.transformed_test_path=os.path.join(self.data_transformation_dir,"transformed",TEST_FILE_NAME.replace("csv", "npz"))
+            self.target_column_enoding=os.path.join(self.data_transformation_dir,"target_encoder",TARGET_ENCODER_OBJECT_FILE_NAME)
+    except Exception as e:
+        raise SensorException(e, sys)
+class ModelTrainerConfig:
+    try:
+        
+        def __init__(self,training_pipeline_config:TrainingPipelineConfig):
+            self.model_trainer=os.path.join(training_pipeline_config.artifact_dir,"model_trainer")
+            self.model_trainer_path=os.path.join(self.model_trainer,"model",MODEL_FILE_NAME)
+            self.expected_score=0.7
+            self.overfitting_threshold=0.1
+            self.param={'min_child_weight': [0,1, 5, 10],
+            'gamma': [0.5, 1, 1.5, 2, 5],
+            'max_depth': [3, 4, 5]}
+            
+        
+    except Exception as e:
+        raise SensorException(e,sys)
+class ModelEvaluationConfig:
     def __init__(self,training_pipeline_config:TrainingPipelineConfig):
-        self.data_transformation_dir=os.path.join(training_pipeline_config,"data_transformation")
-        self.tranform_object_path=os.path.join(self.data_transformation_dir,"transformer",TRANSFORMER_OBJECT_FILE_NAME)
-        self.transformed_train_path=os.path.join(self.data_transformation_dir,"transformed",TRAIN_FILE_NAME.replace("csv", "npz"))
-        self.transformed_test_path=os.path.join(self.data_transformation_dir,"transformed",TEST_FILE_NAME.replace("csv", "npz"))
-        self.target_column_enoding=os.path.join(self.data_transformation_dir,"target_encoder",TARGET_ENCODER_OBJECT_FILE_NAME)
-
-class ModelTrainerConfig:...
-class ModelEvaluationConfig:...
-class ModelPusherConfig:...
-
+        self.change_threshold=0.01
+        
+class ModelPusherConfig:
+    def __init__(self,training_pipeline_config:TrainingPipelineConfig):
+        self.model_pusher_dir=os.path.join(training_pipeline_config.artifact_dir,"model_pusher")
+        self.saved_model_dir=os.path.join("saved_models")
+        self.pusher_model_dir=os.path.join(self.model_pusher_dir,"saved_models")
+        self.pusher_model_path=os.path.join(self.pusher_model_dir,MODEL_FILE_NAME)
+        self.pusher_transformer_path=os.path.join(self.pusher_model_dir,TRANSFORMER_OBJECT_FILE_NAME)
+        self.pusher_target_encoder_path=os.path.join(self.pusher_model_dir,TARGET_ENCODER_OBJECT_FILE_NAME)
 
 
 
 TARGET_COLUMN='class'
+
