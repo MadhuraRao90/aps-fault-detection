@@ -1,7 +1,10 @@
 import pymongo
 import json
 import pandas as pd
-client = pymongo.MongoClient("mongodb://localhost:27017/neurolabDB")
+from dotenv import load_dotenv
+from sensor.config import client
+#load_dotenv()
+#client = pymongo.MongoClient("mongodb://localhost:27017/neurolabDB")
 
 DATA_FILE_PATH='/config/workspace/aps_failure_training_set1.csv'
 DATABASE_NAME='aps'

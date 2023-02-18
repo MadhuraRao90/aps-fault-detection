@@ -16,7 +16,7 @@ from sensor.pipeline.batch_pieline import batch_prediction
 if __name__=="__main__":  
      try:
 
-          #training_pipeline.start_training_pipeline()
+          training_pipeline.start_training_pipeline()
           output_file=batch_prediction("/config/workspace/aps_failure_training_set1.csv")
           print(output_file)
      except Exception as e:

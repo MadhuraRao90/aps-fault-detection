@@ -3,7 +3,8 @@ import json
 import pandas as pd
 from dataclasses import dataclass
 import os
-client = pymongo.MongoClient("mongodb://localhost:27017/neurolabDB")
+#client = pymongo.MongoClient("mongodb://localhost:27017/neurolabDB")
+client=pymongo.MongoClient("mongodb+srv://madhura:Maddy2809@cluster0.jx1ws.mongodb.net/?retryWrites=true&w=majority")
 
 @dataclass
 class EnvironmentalVariable:
